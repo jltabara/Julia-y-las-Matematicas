@@ -73,7 +73,7 @@ julia> typeof(34)  # El tipo de dato del 34
 Int64
 ```
 
-Si escribimos un número entero que sobrepase el límite, pero sin pasarnos mucho, vemos que Julia considera que es un dato de tipo `Int128`. Naturalmente los datos de tipo Int128 tienen un máximo y un mínimo, que podemos conocer con las funciones `typemax(type)` y `typemin(type)` (`type` en Julia se refiere a un tipo de dato).
+Si escribimos un número entero que sobrepase el límite, pero sin pasarnos mucho, vemos que Julia considera que es un dato de tipo `Int128`. Naturalmente los datos de tipo Int128 tienen un máximo y un mínimo, que podemos conocer con las funciones `typemax(tipo)` y `typemin(tipo)`.
 
 ```
 julia> typeof(34341351345134513451451)
@@ -558,7 +558,27 @@ Existen muchas funciones de variable compleja, pero las más elementales son las
 |`conj(z)` | Conjugado|
 |`angle(z)` | Argumento (en radianes)|
 
-> En Julia podemos almacenar los números en variables. Para ello debemos escribir un nombre (más correctamente se llama un **identificador**), un signo igual y después el valor que deseamos almacenar en la variable. Si empezamos el identificador por una letra, prácticamente cualquier identificador es válido (existen algunas excepciones).
+> En Julia podemos almacenar los números en variables. Para ello debemos escribir un nombre (más correctamente se llama un **identificador**), un signo igual y después el valor que deseamos almacenar en la variable. Si empezamos el identificador por una letra, prácticamente cualquier identificador es válido (existen algunas excepciones). Con dichas variables se puede operar del mismo modo que si fuesen números. También se pueden "inicializar" dos o más variables en la misma expresión.
+
+```
+julia> x= 5
+5
+
+julia> x^4 - 5x^2 + 3
+503
+
+julia> sin(x)
+-0.9589242746631385
+
+julia> a, b = 7, 9
+(7,9)
+
+julia> a
+7
+
+julia> b
+9
+```
 
 > Si en Julia separamos por comas distintas operaciones, el resultado aparece ordenado en lo que Julia se llama una **tupla**. De momento no es necesario conocer el manejo de las tuplas en Julia.
 
