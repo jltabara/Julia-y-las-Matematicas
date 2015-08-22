@@ -60,8 +60,20 @@ julia> ((2 + 6) * 8) - (34 - 23)  # Parentesis anidados
 53
 ```
 
+> Julia tiene "ciertos toques" de los lenguajes funcionales. En un lenguaje funcional, hasta los operadores son funciones. Aunque desde el punto de vista matemático puede parecer extraño, podemos poner el operador en **forma prefija** y entre paréntesis y separados por comas cada uno de los factores o sumandos. Aunque parezca mentira esta forma de escribir los operadores es utilizada en la programación con lenguajes funcionales.
 
-    
+```
+julia> +(3, 6) # Equivale a 3 + 6
+9
+
+julia> *(3, 6, 2) # Equivale a 3 * 6 * 2
+36
+
+julia> ^(2, 8) # Equivale 2^8
+256
+```
+
+   
 ## Operaciones con números enteros (2ª parte)
 
 
