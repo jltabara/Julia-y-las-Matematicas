@@ -1,5 +1,6 @@
+# Vectores y *arrays*
 
-## Vectores
+## Los vectores y su tipo
 
 Los vectores en Julia se escriben entre **corchetes y separados por comas**. Por defecto son **vectores columna**. El **tipo del vector lo deduce Julia**, siendo el *menor* tipo que contiene a cada una de las componentes.
 
@@ -9,7 +10,7 @@ Los vectores en Julia se escriben entre **corchetes y separados por comas**. Por
 
 
 
-```
+```julia
 julia> l = [3, 4, 7] # Un vector de "enteros" de tamaño 3
 3-element Array{Int64,1}:
  3
@@ -28,37 +29,35 @@ Al mostrarnos por pantalla un vector tenemos la siguiente información:
 
 - El número de elementos de array.
 
-Existen funciones que nos proporcionan esa información sobre el array.
+Existen funciones que nos proporcionan esa información, desglosada ,sobre el array.
 
 - La función `print(x)` imprime el array y nos muestra únicamente sus componentes **en una fila**.
 
-- ```
+- ```julia
 julia> print([5,6,8,90])
 [5,6,8,90]
 ```
 
 - La función `eltype(x)` (*element type* en inglés) no dice el tipo de los elementos que forman el array.
 
-- ```
+- ```julia
 julia> eltype([5,6,8,90])
 Int64
 ```
 
 - `length(x)` (longitud en inglés) nos da el número de elementos.
 
-- ```
+- ```julia
 julia> length([5,6,8,90])
 4
 ```
-
-
 
 > Si después de una instrucción colocamos un punto y coma, Julia efectua el cálculo, pero no muestra el resultado de dicha operación por pantalla.
 
 Veamos como Julia infiere el tipo del array en función de su contenido.
 
 
-```
+```julia
 julia> l = [3, 7.8, 9.34];
 
 julia> typeof(l)
@@ -73,7 +72,7 @@ Array{Complex{Float64},1}
 
 Utilizando constructores podemos crear arrays del tipo que queramos y no dejar que Julia infiera su tipo. Naturalmente los datos que introduzcamos en el array deben ser de dicho tipo, pues en caso contrario tendríamos un error.
 
-```
+```julia
 julia> l =  Int8[4, 6, 8, 9];
 
 julia> typeof(l)
@@ -95,7 +94,7 @@ ERROR: InexactError()
 
 Para realizar operaciones componente a componente, **por norma general, utilizamos los operadores precedidos por un punto**, aunque es cierto que para algunos operadores esto es innecesario. Los vectores con los que operamos deben de ser del mismo tamaño. 
 
-```
+```julia
 julia> [3, 5, 8] .+ [4, 7, 9] 
 3-element Array{Int64,1}:
   7
@@ -131,7 +130,7 @@ julia> [3, 5, 8].^3
 
 La mayor parte de la funciones en Julia están **vectorizadas**. Ello quiere decir que si aplicamos una función a un vector, en realidad estamos aplicando la función a cada componente del vector.
 
-```
+```julia
 julia> sin([3, 4, 8])
 3-element Array{Float64,1}:
   0.14112 
@@ -158,7 +157,7 @@ Aquí tenemos una lista de algunas funciones, de orientación matemática, que a
 |`minimum(x))` | Devuelve el menor valor|
 
   
-```
+```julia
 julia> dot([4, 6, 8], [5, 9, -4])
 42
 
@@ -184,9 +183,9 @@ julia> minimum([5, 7, 8, 3])
 
 ## Rangos
 
-Los **rangos** en Julia son equivalentes a las **sucesiones aritméticas** de la matemática. Para escribir un rango escribimos el número inicial y número final. La diferencia en este caso elemental es 1. Para construir un vector a partir de un rango, utilizamos la función `collect(rango)`.
+Los **rangos** en Julia son equivalentes a las **sucesiones aritméticas** de la matemática. Para escribir un rango escribimos el número inicial y el número final. La diferencia en este caso elemental es 1. Para construir un vector a partir de un rango, utilizamos la función `collect(rango)`.
 
-```
+```julia
 julia> 4:10
 4:10
 
@@ -210,9 +209,9 @@ julia> prod(collect(1:10))  # La factorial de 10
 3628800
 ```
 
-> Si hacemos actuar una función sobre un rango, como norma general, no es necesario utilizar la función `collect(rango)` y transformar en vector el rango.
+> Si hacemos actuar una función sobre un rango, **como norma general**, no es necesario utilizar la función `collect(rango)` y transformar en vector el rango. En muchos casos basta con utilizar directamente el rango.
 
-```
+```julia
 julia> sum(collect(1:100))
 5050
 
@@ -225,13 +224,9 @@ julia> prod(1:10)
 
 
 
-La distancia entre dos números consecutivos del array es 1. Podemos variar esto y hacer que los números vayan de 2 en 2, de 3 en 3, etc. El "paso" lo marcamos como segundo argumento del rango. `comienzo`:`paso`:`final`. En inglés queda mejor estéticamente `start`:`step`:`stop`. **No es necesario que el último argumento sea exactamente el final. Simplemente marca un valor que no se puede superar**. 
+La distancia entre dos números consecutivos del array es 1. Podemos variar esto y hacer que los números vayan de 2 en 2, de 3 en 3, etc. El "paso" lo marcamos como segundo argumento del rango, quedando la estructura general de rango como `comienzo`:`paso`:`final`. En inglés queda mejor estéticamente `start`:`step`:`stop`. **No es necesario que el último argumento sea exactamente el final. Simplemente marca un valor que no se puede superar**. 
 
-También se pueden crear rangos con la función `range(x,n)`. El primer argumento `x` es el comienzo del rango y el segundo `n` el número de elementos que compondran dicho rango. Si tiene tres argumentos el segundo es el "paso". El último argumento indica de nuevo cuantos elementos tendrá el rango.
-
-En los rangos cualquiera de los parámetros puede ser un flotante. Al trabajar con aritmética no exacta, pueden producirse errores y no llegar a constituir verdaderas progresiones aritméticas.
-
-```
+```julia
 julia> collect(1:2:10)  # Del 1 al 10 (sin pasarse) de 2 en 2
 5-element Array{Int64,1}:
  1
@@ -255,7 +250,13 @@ julia> collect((2:0.1:2.5))
  2.3
  2.4
  2.5
- 
+```
+
+También se pueden crear rangos con la función `range(x,n)`. El primer argumento `x` es el comienzo del rango y el segundo `n` el número de elementos que compondrán dicho rango. Si tiene tres argumentos el segundo es el "paso". El último argumento indica de nuevo cuantos elementos tendrá el rango.
+
+> En los rangos cualquiera de los parámetros puede ser un flotante. Al trabajar con aritmética no exacta, pueden producirse errores y no llegar a constituir verdaderas progresiones aritméticas.
+
+```julia 
 julia> range(3,5) # Comienzo 3, 5 elementos
 3:7
 
@@ -267,14 +268,7 @@ julia> range(2,0.1,6) # Principio 2, paso 0.1, 6 elementos
 
 Los arrays en Julia se **indexan desde el número 1**, contrariamente a otros lenguajes que comienzan la numeración en 0. Para acceder al elemento `i` de un array escribimos `[i]` detrás del nombre del array. Para obtener el último elemento escribimos `[end]`. 
 
-Para obtener partes de un array se pueden utilizar dos métodos:
-
-- Escribir dentro de los corchetes un array indicando las posiciones que queremos extraer.
-
-- Utilizar la notación de rangos. Este se denomina *slide* en inglés. Al hacer *slide* podemos no escribir el primer o el último elemento.
-
-
-```
+```julia
 julia> v = [2, 5, 8, 90, -8];
 
 julia> v[3]  ## Posicion 3
@@ -282,6 +276,16 @@ julia> v[3]  ## Posicion 3
 
 julia> v[end] # Ultima componente
 -8
+```
+
+Para obtener partes de un array se pueden utilizar dos métodos:
+
+- Escribir dentro de los corchetes un array indicando las posiciones que queremos extraer.
+
+- Utilizar la notación de rangos. Esto se denomina *slide* en inglés. Al hacer *slide* podemos no escribir el primer o el último elemento.
+
+```julia
+julia> v = [2, 5, 8, 90, -8];
 
 julia> v[[1,4]] # Posiciones 1 y 4
 2-element Array{Int64,1}:
@@ -318,14 +322,12 @@ julia> v[:] # Todo el array
  -8 
 ```
 
-
-
 > Si en una celda aparecen varias expresiones, se ejecutan todas ellas en orden secuencial, pero **únicamente se muestra el resultado de la última de las expresiones**.  Si queremos hacer esto en una sola línea tenemos que emplear el punto y coma para "ocultar" las expresiones que no queramos que aparezcan.
 
 
 Las componentes de un vector son en realidad variables. Con la instrucción de asignación, podemos variar el contenido de dicha variable y por lo tanto cambiar parte del vector sin tener que volver a escribirlo.
 
-```
+```julia
 julia> v = [2, 5, 8, -4]; v[3] = 123; v
 4-element Array{Int64,1}:
    2
@@ -349,7 +351,7 @@ En un lenguaje de programación los array son un tipo de  **estructura de datos*
  
 La función `push!(v, x)` añade uno o varios elementos al final del array. El array sobre el que actuamos se modifica. Los datos que le añadamos deben ser compatibles con el tipo del array
 
-```
+```julia
 julia> v =[2, 4, 7]; push!(v, 90); v
 4-element Array{Int64,1}:
   2
@@ -369,9 +371,9 @@ ERROR: InexactError()
  in push! at array.jl:419
 ``` 
 
-La función `pop!(v)` borra el último elemento del array. Además de esto no lo devuelve por si queremos efectuar alguna operación con el elemento desechado.
+La función `pop!(v)` borra el último elemento del array. Además de esto nos devuelve dicho valor, por si queremos efectuar alguna operación con el elemento desechado.
  
-```
+```julia
 julia> v =[2, 4, 7]; pop!(v); v
 2-element Array{Int64,1}:
  2
@@ -380,11 +382,12 @@ julia> v =[2, 4, 7]; pop!(v); v
 
 La función `append!(v, w)` concatena dos vectores, en el orden en que están escritos.  También podemos concatenar de otro modo, utilizando el punto y coma. Esta nueva forma de concatenar se entenderá mejor cuando estudiemos las matrices. La función `prepend!(v,w)` concatena los arrays en el orden contrario.
 
-```
-julia> append!(v, [4, 6, 7])
-5-element Array{Int64,1}:
+```julia
+julia> v =[2, 4, 7]; append!(v, [4, 6, 7])
+6-element Array{Int64,1}:
  2
  4
+ 7
  4
  6
  7
@@ -410,7 +413,7 @@ julia> prepend!([1, 2, 3], [4, 5, 6])
 
 `shift!(v)` elimina el primer elemento y `unshift!(v, x)` añade uno o varios elementos al comienzo del array. 
 
-```
+```julia
 julia> v = [1, 2, 3, 4]; shift!(v); v
 3-element Array{Int64,1}:
  2
@@ -428,7 +431,7 @@ julia> v = [1, 2, 3, 4]; unshift!(v, 90); v
 
 La función `deleteat!(v, n)` borra el elemento `n` del array, dejando un array con menor longitud.
 
-```
+```julia
 julia> v = [4, 5, 8, 10]; deleteat!(v, 3); v
 3-element Array{Int64,1}:
   4
@@ -438,7 +441,7 @@ julia> v = [4, 5, 8, 10]; deleteat!(v, 3); v
 
 La función `sort(v)` ordena el vector y no modifica el vector. La función `sort!(v)` hace lo mismo, pero si modifica el vector.
 
-```
+```julia
 julia> v = [4, 8, 2, 8]
 4-element Array{Int64,1}:
  4
@@ -477,9 +480,9 @@ $$
 \{x^2 \  |\  x \in \{1,5,8,4\}\}
 $$
 
-crea el conjunto formado por los cuadrados de los elementos. En Julia se pueden construir vectores siguiendo un patrón análogo, cambiando la barra vertical por un `for`, el signo de pertenecia por un `in` y utilizando un vector, o un rango, como conjunto del que se toman los datos.
+crea el conjunto formado por los cuadrados de los elementos indicados. En Julia se pueden construir vectores siguiendo un patrón análogo, cambiando la barra vertical por un `for`, el signo de pertenencia por un `in` y utilizando un vector, o un rango, como conjunto del que se toman los datos.
 
-```
+```julia
 julia> [i^2 for i in [1, 5, 8, 4]] # El conjunto anterior
 4-element Array{Int64,1}:
   1
@@ -498,7 +501,7 @@ julia> [i^2 for i in 1:5]
 
 ## Vectores aleatorios
 
-Existen diversas funciones en Julia que generarn números aleatorios. Con ellos podemos formar vectores. Los números aleatorios pueden ser aleatorios en el intervalo [0,1] o bien seguir una distribución normal standard. La única diferencia es el sufijo "d". También podemos elegir los números aleatorios de un rango.
+Existen diversas funciones en Julia que generan números aleatorios. Con ellos podemos formar vectores. Los números aleatorios pueden ser aleatorios en el intervalo [0,1] o bien seguir una distribución normal standard. La única diferencia es el sufijo "d". También podemos elegir los números aleatorios de un rango.
   
 | | |
 | --- | --- |
@@ -506,7 +509,7 @@ Existen diversas funciones en Julia que generarn números aleatorios. Con ellos 
 |`randn(n)` | Vector aleatorio "normal" de longitud n|
 |`rand(rango, n)` | Vector aleatorio en el rango de longitud n|
 
-```
+```julia
 julia> rand(3) # Aleatorio entre 0 y 1
 3-element Array{Float64,1}:
  0.800577
@@ -538,7 +541,7 @@ Las tuplas son muy similares a los arrays, pero tienen algunas diferencias impor
 
 Si nosotros definimos una tupla podemos acceder a sus elementos con la notación de índice. Sin embargo si intentamos cambiar el valor de un elemento nos dará un mensaje de error. Lo mismo es válido para todas las funciones que modifican los arrays.
 
-```
+```julia
 julia> t = (4, 7, 8)
 (4,7,8)
 
@@ -564,7 +567,7 @@ La notación de Julia para los arrays y la notación matemática para denotar lo
 
 Julia tiene un nuevo tipo de dato, llamado conjunto, y que se puede formar a partir de los arrays o de tuplas. En este tipo de dato no existe el concepto de índice y no existe elementos repetidos. Para crear conjuntos utilizamos el constructor `Set(v)`.
 
-```
+```julia
 julia> c = Set([2, 3, 5, 7, 11, 3]) # Se borra el repetido
 Set([7,2,3,11,5])
 
@@ -573,8 +576,7 @@ ERROR: MethodError: `getindex` has no method matching
 getindex(::Set{Int64}, ::Int64)
 ```
 
-Con los conjuntos podemos efectuar las típicas operaciones conjuntistas de unión, intersección, ... En realidad Julia también puede realizar dichas operaciones directamente con arrays, eliminando los duplicados.
-
+Con los conjuntos podemos efectuar las típicas operaciones conjuntistas de unión, intersección, ... 
 | | |
 | --- | --- |
 |`union(A, B)` | $A \cup B$|
@@ -584,7 +586,7 @@ Con los conjuntos podemos efectuar las típicas operaciones conjuntistas de uni�
 
 
 
-```
+```julia
 julia> A = Set([1, 2, 3]); B = Set([3, 4, 5]);
 
 julia> union(A, B)
@@ -605,9 +607,9 @@ true
 julia> in(8, A)
 false
 ```
-Lo mismo se puede realizar directamente con arrays.
+Lo mismo se puede realizar directamente con arrays, eliminando los  elementos duplicados.
 
-```
+```julia
 julia> A = [1, 2, 3]; B = [3, 4, 5];
 
 julia> typeof(ans)

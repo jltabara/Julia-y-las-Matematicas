@@ -1,9 +1,10 @@
-## Matrices
+# Matrices
 
+## Creación de matrices
 
-Para introducir un vector fila escribimos sus componentes **separados por espacios en blanco**. Con la función `transpose(v)` podemos transformar el vector fila en un vector columna (vector transpuesto). La transposición también se puede lograr colocando un apóstrofe al vector, por analogía con la notación matemática.
+Para introducir un vector fila escribimos sus componentes **separados por espacios en blanco**. Con la función `transpose(v)` podemos transformar el vector fila en un vector columna (vector transpuesto). La transposición también se puede lograr **colocando un apóstrofe al vector**, por analogía con la notación matemática.
 
-```
+```julia
 julia> v = [1 3 5]  # Un vector fila
 1x3 Array{Int64,2}:
  1  3  5
@@ -33,9 +34,7 @@ julia> v # El vector v no ha cambiado
 
 - **Por columnas**. Creamos un array, donde el primer elemento del array es la primera columna, **separado por un espacio en blanco** escribimos la segunda columna, ...
 
-
-
-```
+```julia
 julia> A = [1 2 3; 4 5 6]
 2x3 Array{Int64,2}:
  1  2  3
@@ -53,7 +52,7 @@ julia> B = [[1, 2, 3] [4, 5, 6]]
 Para extraer el elemento $a_{ij}$ de la matriz escribimos `[i,j]` a continuación de la matriz. Los rangos que hemos empleado en los vectores para extraer partes de un vector se emplean también para extraer submatrices.
 
 
-```
+```julia
 julia> A = [1 2 3; 4 5 6; 7 8 9]
 3x3 Array{Int64,2}:
  1  2  3
@@ -92,16 +91,9 @@ julia> A[[1,2],[2,3]]  # Filas 1 y 2 y columnas 2 y 3
 
 Aunque todas las matrices se pueden crear introduciendo todos sus elementos, existen matrices especiales que se pueden crear de modo más rápido con ciertas funciones: la matriz cero, la matriz identidad, ...
 
-| | |
-| --- | --- |
-|`zeros(n,m)` | Matriz nula de orden n $\times$ m|
-|`ones(n,m)` | Matriz con unos de orden n $\times$ m|
-|`eye(n)` | Matriz unidad de orden n|
-|`diagm(v)` | Matriz con v en la diagonal principal|
+`zero(n)` crea un vector de ceros y tamaño `n`. `zero(n, m)` crea una matriz de orden n por m. El tipo es float.
 
-`zero(n)` crea un vector de ceros y tamaño `n`. `zero(n, m)` crea una matriz de orden $n \times m$. El tipo es float.
-
-```
+```julia
 julia> zeros(3,4)  # Tipo float
 3x4 Array{Float64,2}:
  0.0  0.0  0.0  0.0
@@ -111,7 +103,7 @@ julia> zeros(3,4)  # Tipo float
 
 `ones(n, m)` crea una matriz llena de unos. 
 
-```
+```julia
 julia> ones(3, 4)
 3x4 Array{Float64,2}:
  1.0  1.0  1.0  1.0
@@ -121,7 +113,7 @@ julia> ones(3, 4)
 
 Para obtener una matriz con todos los elementos iguales a 7 podemos crear una matriz con unos y multiplicar por 7. Sin embargo Julia tiene una función que hace ese trabajo en un solo paso: `fill(x, n, m)`.
 
-```
+```julia
 julia> fill(7, 2, 3)
 2x3 Array{Int64,2}:
  7  7  7
@@ -130,7 +122,7 @@ julia> fill(7, 2, 3)
 
 `eye(n)` crea la matriz identidad de orden n. `eye(n, m)` crea una matriz del orden indicado con la diagonal principal llena de unos. 
 
-```
+```julia
 julia> eye(4)
 4x4 Array{Float64,2}:
  1.0  0.0  0.0  0.0
@@ -147,13 +139,14 @@ julia> eye(3,4)
 
 `diagm(v)` crea una matriz diagonal con el vector dado en la diagonal principal. Si le añadimos un segundo argumento podemos "subir" o "bajar" dicha diagonal.
 
-```
-julia> eye(3,4)
-3x4 Array{Float64,2}:
- 1.0  0.0  0.0  0.0
- 0.0  1.0  0.0  0.0
- 0.0  0.0  1.0  0.0
-
+```julia
+julia> diagm([1, 2, 3, 4])
+4x4 Array{Int64,2}:
+ 1  0  0  0
+ 0  2  0  0
+ 0  0  3  0
+ 0  0  0  4
+ 
 julia> diagm([1, 2, 3, 4], -1) # Una diagonal "abajo"
 5x5 Array{Int64,2}:
  0  0  0  0  0
@@ -177,8 +170,8 @@ julia> diagm([1, 2, 3, 4], 2) # Dos diagonales "arriba"
 
 Las operaciones componente a componente se realizan con los operadores precedidos por un punto, puesto que esa es la forma de operar con arrays de cualquier dimensión. Sin embargo ya vimos en el tema de vectores que en el caso particular de la suma, la resta y la multiplicación por escalares se pueden utilizar los operadores sin el punto.
 
-```
-julia> A= [1 2 3; 4 5 6; 7 8 9]; B =[3 8 4; 6 9 7; 3 9 8];
+```julia
+julia> A = [1 2 3; 4 5 6; 7 8 9]; B =[ 3 8 4; 6 9 7; 3 9 8];
 
 julia> 3.6 * A .+ B .- 5 * A 
 3x3 Array{Float64,2}:
@@ -195,7 +188,7 @@ julia> 3.6 * A + B - 5 * A
 
 Si sumamos o restamos una constante a una matriz, le sumamos o restamos la constante a cada componente.
 
-```
+```julia
 julia> A= [1 2 3; 4 5 6; 7 8 9]
 3x3 Array{Int64,2}:
  1  2  3
@@ -217,7 +210,7 @@ julia> -8 - A
  
 La multiplicación matricial se obtiene con el asterisco y se realiza siempre y cuando esté permitido por las dimensiones de las matrices.
 
-```
+```julia
 julia> A= [1 2 3; 4 5 6; 7 8 9]; B =[3 8 4; 6 9 7; 3 9 8];
 
 julia> A * B
@@ -235,8 +228,8 @@ julia> B * A
 
 La potencia matricial se calcula con el circunflejo. En particular si elevamos una matriz a -1 estamos calculando la inversa de la matriz.
 
-```
-julia> A= [1 2 3; 4 5 6; 7 8 9]; B =[3 8 4; 6 9 7; 3 9 8];
+```julia
+julia> A = [1 2 3; 4 5 6; 7 8 9]; B = [3 8 4; 6 9 7; 3 9 8];
 
 julia> A^2
 3x3 Array{Int64,2}:
@@ -273,6 +266,7 @@ ERROR: Base.LinAlg.SingularException(3)
 ## Funciones matriciales básicas
 
 Tras las operaciones con matrices, estas son probablemente las funciones matriciales más sencillas.
+
 | | |
 | --- | --- |
 |`det(A)` | Determinante de A|
@@ -280,7 +274,7 @@ Tras las operaciones con matrices, estas son probablemente las funciones matrici
 |`trace(A)` | Traza de A|
 |`rank(A)` | Rango de A|
 
-```
+```julia
 julia> A = [4 6 8; 7 3 1; 4 8 9]
 3x3 Array{Int64,2}:
  4  6  8
@@ -313,7 +307,7 @@ julia> A^(-1)
 
 Sobre todo en informática, es común formar matrices a partir de submatrices. Para ello vamos concatenando, de manera horizontal o vertical submatrices. Se puede hacer utilizando  el espacio en blanco y el punto y coma o también utilizar las funciones `hcat(A, B)` y `vcat(A, B)`.
 
-```
+```julia
 julia> A= [1 2 3; 4 5 6; 7 8 9]
 3x3 Array{Int64,2}:
  1  2  3
@@ -362,7 +356,7 @@ julia> [A; B] # Con el punto y coma
 
 Cualquier sistema lineal se puede escribir en la forma `A . X = B` donde `A` es la matriz del sistema y `B` el vector de términos independientes. Resolver el sistema es encontrar el vector (o vectores) `X` que cumplen dicha ecuación. Esto lo resuelve Julia rápidamente con el operador `\`. En realidad Julia puede encontrar `X` aunque sea también una matriz y no un simple vector columna.
 
-```
+```julia
 julia> A = [2 6; 7 9]; B = [3,7]; # Sistema compatible
 
 julia> A \ B
@@ -378,7 +372,7 @@ julia> A * ans # Comprobacion de la solucion
 
 Ahora intentamos resolver un sistema incompatible y otro indeterminado.
 
-```
+```julia
 julia> A = [2 6; 1 3]; B = [3,7]; A \ B # Incompatible
 ERROR: Base.LinAlg.SingularException(2)
  in \ at linalg/factorization.jl:25
@@ -391,11 +385,11 @@ ERROR: Base.LinAlg.SingularException(2)
 ``` 
 
 
-Como vemos Julia con los sistemas más simples que no son compatibles y determinados tiene problemas.
+Con los sistemas más simples que no son compatibles y determinados tiene problemas.
 
 > Para comprobar la "velocidad" de Julia podemos usar la **macro** `@time`. Si escribimos esta macro delante de una operación, nos calcula cuanto tiempo tarda en el cálculo.
  
-```
+```julia
 julia> A = rand(1000, 1000); # Matriz "grande"
 
 julia> B = rand(1000);
