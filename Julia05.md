@@ -226,6 +226,25 @@ julia> if isprime(641)
 Es primo
 ```
 
+En realidad aquí solamente nos interesan la condición y los dos bloques. Las intrucciones `if`,`else`, `end` las podemos pensar como meros limitadores de esas tres partes. Resulta que la construcción `?:`, que es mucho menos intuitiva, puede realizar el mismo trabajo. La estructura sintáctiva es:
+
+```
+condicion ? bloque 1 : bloque 2
+```
+
+```julia
+julia> isprime(7) ? "primo" : "compuesto"
+"primo"
+
+julia> if isprime(7)
+           "primo"
+       else
+           "compuesto"
+       end
+"primo"
+```
+
+Las dos contrucciones son equivalentes, pero la primera solamente se debe utilizar si tenemos poco que escribir, pues en caso contrario es más difícil de entender que la construcción segunda.
 
 
 
