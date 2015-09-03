@@ -191,7 +191,43 @@ end
 ```
 
 
-## La sentencia if else end
+## La sentencia `if ... else ... end`
+
+
+La estructura sintáctica de esta construcción es
+
+```
+if condicion
+    bloque de sentencias 1
+else
+    bloque de sentencias 2
+end
+```
+
+Nuevamente volvemos a comprobar una condición. En caso de ser verdadera se ejecuta únicamente el bloque 1. Si la condición es falsa entonces se ejecuta únicamente el bloque 2.
+
+```julia
+julia> if isprime(8)
+           println("Es primo")
+       else
+           println("No es primo")
+       end
+No es primo
+```
+
+Se comprueba si 8 es primo. Como esta afirmación es falsa entonces se ejecuta el segundo bloque. Si la condición hubiese sido cierta se hubiese ejecutado el primer bloque.
+
+```julia
+julia> if isprime(641)
+           println("Es primo")
+       else
+           println("No es primo")
+       end
+Es primo
+```
+
+
+
 
 ## La notacion  ? :
 
