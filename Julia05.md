@@ -2,9 +2,9 @@
 
 ## Introducción
 
-Hasta ahora todo lo que hemos realizado en Julia consistía en evaluar una única expresión. A veces también se efectuamos dos o tres instrucciones en cada linea, separando cada instrucción por comas o por puntos y comas. 
+Hasta ahora todo lo que hemos realizado en Julia consistía en evaluar una única expresión. A veces también efectuamos dos o tres instrucciones en cada linea, separando cada instrucción por comas o por puntos y comas. 
 
-Un programa en Julia consta de varias expresiones, escritas en un orden determinado. Dichas intrucciones se pueden escribir en un archivo de texto y ejecutarlas en la consola o bien escribir todas las instrucciones en una única celda de la versión web. En ambos casos las sentencias se van ejecutando en orden. Es lo que se denomina el **flujo** del programa. A veces estamos interesado en variar este flujo y no ejecutar de modo lineal las instrucciones. Para variar el flujo existen, en prácticamente todos los lenguajes de programación, dos tipos de construcciones:
+Un programa en Julia consta de varias expresiones, escritas en un orden determinado. Dichas intrucciones se pueden escribir en un archivo de texto y ejecutarlas en la consola o bien escribir todas las instrucciones en una única celda de la versión web. En ambos casos las sentencias se van ejecutando en orden. Es lo que se denomina el **flujo** del programa. Podemos estar interesados en variar este flujo y no ejecutar de modo lineal las instrucciones. Para variar el flujo existen, en prácticamente todos los lenguajes de programación, dos tipos de construcciones:
 
 - La sentencia condicional: Una parte de las sentencias se  ejecuta solamente en ciertos casos.
 
@@ -129,12 +129,11 @@ julia> A .== B
  false  false   true 
 ```
  
+## La sentencia `if ... end`
+
+La sentecia más elemental de control de flujo es `if ... end`. Despúes del `if` debemos colocar una condición booleana (cualquier "cosa" que al evaluarla nos proporcione un `true` o un `false`). Entre la condición y el `end` final podemos colocar un bloque de sentencias. Dicho bloque se ejecuta si y solamente si la condición es verdadera. Si la condición es falsa, no se ejecuta ninguna instrucción del bloque y el flujo pasa a la siguiente instrucción que hayamos escrito tras el `end` (si no hay nada tras el `end` entonces se detiene la ejecución).
 
 
-
-
-
-## La sentencia if end
 
 ## La sentencia if else end
 
