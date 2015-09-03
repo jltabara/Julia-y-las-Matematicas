@@ -131,8 +131,64 @@ julia> A .== B
  
 ## La sentencia `if ... end`
 
-La sentecia más elemental de control de flujo es `if ... end`. Despúes del `if` debemos colocar una condición booleana (cualquier "cosa" que al evaluarla nos proporcione un `true` o un `false`). Entre la condición y el `end` final podemos colocar un bloque de sentencias. Dicho bloque se ejecuta si y solamente si la condición es verdadera. Si la condición es falsa, no se ejecuta ninguna instrucción del bloque y el flujo pasa a la siguiente instrucción que hayamos escrito tras el `end` (si no hay nada tras el `end` entonces se detiene la ejecución).
+La sentecia más elemental de control de flujo es `if ... end`. Después del `if` debemos colocar una condición booleana (cualquier "cosa" que al evaluarla nos proporcione un `true` o un `false`). Entre la condición y el `end` final podemos colocar un bloque de sentencias. Dicho bloque se ejecuta si y solamente si la condición es verdadera. Si la condición es falsa, no se ejecuta ninguna instrucción del bloque y el flujo pasa a la siguiente instrucción que hayamos escrito tras el `end` (si no hay nada tras el `end` entonces se detiene la ejecución).
 
+```julia
+julia> if true
+           println("Se ejecuta la orden de imprimir")
+       end
+Se ejecuta la orden de imprimir
+
+julia> if false
+           println("NO se ejecuta la orden de imprimir")
+       end
+
+julia> 
+```
+
+Hemos visto que si la condición es verdadera se ejecuta el bloque y en caso contrario no se ejecuta. Lo más habitual es que en la condición hagamos una comprobación de la que no sabremos "a priori" si es cierta o falsa. Si resulta que es cierta deseamos que se ejecute el bloque. En caso contrario no realiza nada.
+
+```julia
+julia> if isprime(7)
+           println("El numero es primo")
+       end
+El numero es primo
+
+julia> if isprime(9)
+           println("El numero es primo")
+       end
+
+julia> 
+```
+
+En el bloque pueden ir más de una expresión.
+
+```julia
+julia> if true
+           println("Imprimo esta linea")
+           x = 9
+           println(x)
+       end
+Imprimo esta linea
+9
+```
+
+Como la condición es verdadera se ejecuta la primera instrucción y se imprime una frase por pantalla. Después se le asigna un valor a una variable `x` y por último se imprime por pantalla el valor de dicha variable.
+
+En los ejemplos anteriores todo lo que hemos escrito entre la condición y el `end` lo hemos sangrado con una tabulación. Esta técnica se conoce en programación como **indentación**. En realidad la indentación nos ayuda a leer el código a los humanos, pero no es necesario indentar en Julia (en el lenguaje Python la indentación es obligatoria).
+
+```julia
+julia> if isprime(7) println("El numero es primo") end
+El numero es primo
+```
+
+La estructura sintáctica de esta contrucción la podemos resumir como
+
+```
+if condicion
+    bloque de sentencias
+end
+```
 
 
 ## La sentencia if else end
