@@ -248,7 +248,8 @@ Las dos contrucciones son equivalentes, pero la primera solamente se debe utiliz
 
 ## Condicionales anidados
 
-Las contrucciones anteriores nos permiten dar una alternativa o dos alternativas. A veces necesitamos diferencias entre más casos, haciendo más comprobaciones. Para ello se pueden utilizar sentencias anidadas, aunque suele se más cómodo utilizar la instrucción `elseif`. La estructura sintáctica es
+
+Los condicionales se pueden anidar y escribir sentencias `if` dentro de sentencias `if`. Sin embargo utilizar varios `if` anidados puede complicar la lectura (por humanos) del código. Por ello se suele utilizar la instrucción `elseif` que mejora la lectura del código. La estructura sintáctica es
 
 ```
 if condicion 1
@@ -263,7 +264,7 @@ else
 end
 ```
 
-Primeramente se comprueba la condición 1. Si la condición es verdadera se ejecuta el bloque 1. Si esto no sucede se pasa a la instrucción `elseif` y se comprueba la segunda condición. Si es verdadera se ejecuta el bloque 2. Podemos poner tantas instrucciones `elseif` como necesitemos.  Si ninguna de las condiciones ha sido cierta entonces se ejecuta el bloque que va después del `else`.  Este último bloque es opcional. Si no ponemos un `else` y ninguna condición es verdadera, entonces no se ejectua ningún código.
+Primeramente se comprueba la condición 1. Si la condición es verdadera se ejecuta el bloque 1. Si esto no sucede se pasa a la instrucción `elseif` y se comprueba la segunda condición. Si es verdadera se ejecuta el bloque 2. Podemos poner tantas instrucciones `elseif` como necesitemos.  Si ninguna de las condiciones ha sido cierta entonces se ejecuta el bloque que va después del `else`.  Este último bloque es opcional. Si no ponemos un `else` y ninguna condición es verdadera, entonces no se ejecuta ningún código.
 
 ```julia
 julia> x = 4
@@ -283,7 +284,35 @@ Es menor que 5
 
 Variando el valor de la variable podemos hacer que se ejecute cada uno de los bloques.
 
+```julia
+julia> x = 67
+67
+
+julia> if x < 5
+           println("Es menor que 5")
+       elseif x < 10
+           println("Es menor que 10 y mayor o igual que 5")
+       elseif x < 20
+           println("Mayor o igual que 10 y menor que 20")
+       else
+           println("Mayor que 20")
+       end
+Mayor que 20
+```
 
 ## El bucle for
+
+El bucle `for` repite una cantidad de veces conocida de antemano una porción de código.  Para utilizar el bucle `for` necesitamos un **iterador**.  Como iterador se pueden emplear varios tipos de datos, pero los más habituales son los rangos y los vectores. 
+
+La estructura sintáctica es:
+
+```
+for n in iterador
+    bloque
+end
+```
+
+La variable `n` se crea en el momento de utilizar el bucle y puede tener cualquier nombre. Además dicha variable se puede utilizar dentro del bloque. Como siempre para indicar a Julia  que finaliza un bloque debemso utilizar `end`.
+
 
 ## El bucle while
