@@ -175,7 +175,7 @@ Imprimo esta linea
 
 Como la condición es verdadera se ejecuta la primera instrucción y se imprime una frase por pantalla. Después se le asigna un valor a una variable `x` y por último se imprime por pantalla el valor de dicha variable.
 
-En los ejemplos anteriores todo lo que hemos escrito entre la condición y el `end` lo hemos sangrado con una tabulación. Esta técnica se conoce en programación como **indentación**. En realidad la indentación nos ayuda a leer el código a los humanos, pero no es necesario indentar en Julia (en el lenguaje Python la indentación es obligatoria).
+> En los ejemplos anteriores todo lo que hemos escrito entre la condición y el `end` lo hemos sangrado con una tabulación. Esta técnica se conoce en programación como **indentación**. En realidad la indentación nos ayuda a leer el código a los humanos, pero no es necesario indentar en Julia (en el lenguaje Python la indentación es obligatoria).
 
 ```julia
 julia> if isprime(7) println("El numero es primo") end
@@ -198,9 +198,9 @@ La estructura sintáctica de esta construcción es
 
 ```
 if condicion
-    bloque de sentencias 1
+    bloque 1
 else
-    bloque de sentencias 2
+    bloque 2
 end
 ```
 
@@ -244,14 +244,44 @@ julia> if isprime(7)
 "primo"
 ```
 
-Las dos contrucciones son equivalentes, pero la primera solamente se debe utilizar si tenemos poco que escribir, pues en caso contrario es más difícil de entender que la construcción segunda.
-
-
-
-## La notacion  ? :
+Las dos contrucciones son equivalentes, pero la primera solamente se debe utilizar siempre y cuando no complique el código.
 
 ## Condicionales anidados
-						
+
+Las contrucciones anteriores nos permiten dar una alternativa o dos alternativas. A veces necesitamos diferencias entre más casos, haciendo más comprobaciones. Para ello se pueden utilizar sentencias anidadas, aunque suele se más cómodo utilizar la instrucción `elseif`. La estructura sintáctica es
+
+```
+if condicion 1
+    bloque 1
+elseif condicion 2
+    bloque 2
+elseif condicion3
+    bloque 3
+    ...
+else
+    ultimo bloque
+end
+```
+
+Primeramente se comprueba la condición 1. Si la condición es verdadera se ejecuta el bloque 1. Si esto no sucede se pasa a la instrucción `elseif` y se comprueba la segunda condición. Si es verdadera se ejecuta el bloque 2. Podemos poner tantas instrucciones `elseif` como necesitemos.  Si ninguna de las condiciones ha sido cierta entonces se ejecuta el bloque que va después del `else`.  Este último bloque es opcional. Si no ponemos un `else` y ninguna condición es verdadera, entonces no se ejectua ningún código.
+
+```julia
+julia> x = 4
+4
+
+julia> if x < 5
+           println("Es menor que 5")
+       elseif x < 10
+           println("Es menor que 10 y mayor o igual que 5")
+       elseif x < 20
+           println("Mayor o igual que 10 y menor que 20")
+       else
+           println("Mayor que 20")
+       end
+Es menor que 5
+```
+
+Variando el valor de la variable podemos hacer que se ejecute cada uno de los bloques.
 
 
 ## El bucle for
