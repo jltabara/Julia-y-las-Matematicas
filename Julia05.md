@@ -312,7 +312,34 @@ for n in iterador
 end
 ```
 
-La variable `n` se crea en el momento de utilizar el bucle y puede tener cualquier nombre. Además dicha variable se puede utilizar dentro del bloque. Como siempre para indicar a Julia  que finaliza un bloque debemso utilizar `end`.
+La variable `n` se crea en el momento de utilizar el bucle y puede tener cualquier nombre. Además dicha variable se puede utilizar dentro del bloque. Como siempre para indicar a Julia  que finaliza un bloque debemos utilizar `end`.
+
+```julia
+julia> for n in 1:5
+           println("Una linea")
+       end
+Una linea
+Una linea
+Una linea
+Una linea
+Una linea
+```
+
+
+La `n` varia de 1 hasta 5 y por lo tanto el bucle se repite 5 veces. En este caso imprimos 5 veces por pantalla.
+También podemos utilizar la variable `n` dentro del bloque.
+
+```julia
+julia> for n in 1:5
+           println(n)
+       end
+1
+2
+3
+4
+5
+```
+
 
 
 ## El bucle while
