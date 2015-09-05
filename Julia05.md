@@ -340,6 +340,21 @@ julia> for n in 1:5
 5
 ```
 
+También podemos utilizar vectores como iteradores
+
+```julia
+
+julia> for n in [3, 7, 9, 90, 9]
+           println(n^2)
+       end
+9
+49
+81
+8100
+81
+```
+
+
 
 
 ## El bucle while
