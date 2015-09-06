@@ -307,15 +307,15 @@ El bucle `for` repite una cantidad de veces conocida de antemano una porción de
 La estructura sintáctica es:
 
 ```
-for n in iterador
+for i in iterador
     bloque
 end
 ```
 
-La variable `n` se crea en el momento de utilizar el bucle y puede tener cualquier nombre. Además dicha variable se puede utilizar dentro del bloque. Como siempre para indicar a Julia  que finaliza un bloque debemos utilizar `end`.
+La variable `i` se crea en el momento de utilizar el bucle y puede tener cualquier nombre. Además dicha variable se puede utilizar dentro del bloque. Como siempre para indicar a Julia  que finaliza un bloque debemos utilizar `end`.
 
 ```julia
-julia> for n in 1:5
+julia> for i in 1:5
            println("Una linea")
        end
 Una linea
@@ -326,12 +326,11 @@ Una linea
 ```
 
 
-La `n` varia de 1 hasta 5 y por lo tanto el bucle se repite 5 veces. En este caso imprimos 5 veces por pantalla.
-También podemos utilizar la variable `n` dentro del bloque.
+La `i` varia de 1 hasta 5 y por lo tanto el bucle se repite 5 veces. En este caso imprimimos 5 veces por pantalla. También podemos utilizar la variable `i` dentro del bloque.
 
 ```julia
-julia> for n in 1:5
-           println(n)
+julia> for i in 1:5
+           println(i)
        end
 1
 2
@@ -344,8 +343,8 @@ También podemos utilizar vectores como iteradores
 
 ```julia
 
-julia> for n in [3, 7, 9, 90, 9]
-           println(n^2)
+julia> for i in [3, 7, 9, 90, 9]
+           println(i^2)
        end
 9
 49
