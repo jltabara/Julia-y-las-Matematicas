@@ -264,6 +264,7 @@ julia> range(2,0.1,6) # Principio 2, paso 0.1, 6 elementos
 2.0:0.1:2.5
 ```
 
+
 ## Indexación y *subarrays*
 
 Los arrays en Julia se **indexan desde el número 1**, contrariamente a otros lenguajes que comienzan la numeración en 0. Para acceder al elemento `i` de un array escribimos `[i]` detrás del nombre del array. Para obtener el último elemento escribimos `[end]`. 
